@@ -1,39 +1,47 @@
-# RectanglesSearch
+# RectanglesSearchWithBasicAuthentication
 
 How to raize the project:
 
-1. Change Server name into appsettings.json on your Server name.
+1. Build the Docker image.
 
-2. Apply mirations to MS QSL database (projects)
-{
-	RectanglesSearch.Api
-	RectanglesSearch.Api.Identity
-} for these projects.
+2. Raize Up the docker-compose
+	(docker-compose up -d).
 
-Apply RectanglesSearchIndex from INDEX.sql for Rectangles table (RectangleDatabase)
+3. Change Server name into appsettings.json from Server=rectanglessearchapi_database,1433; on Server=localhost,1433; .
+update-database into Package Manager Console from Visual Sudio.
 
-3. Start three projects simultaniously 
-(
-	RectanglesSearch.Web
-	RectanglesSearch.Api
-	RectanglesSearch.Api.Identity
-)
+4. Start the project into Visual Sudio to initialize database.
 
-4. Go to https://localhost:7104/
+5. Apply INDEX.sql to the container database.
 
-5. Login to the application.
-
-6. Credentials:
-	UserName: admin@gmail.com
-	Password: Admin123*
+6. Raize all containers if any of them is down. 
 	
-7. Take the token.
+7. You can test this service using Postman or other tools like it. 
+	- Url: http://localhost:7157/api/rectangle/searchcoordinates
+	- Method type: POST
+	- Body:
+[
+  {
+    "xCoordinate": 53,
+    "yCoordinate": 37
+  },
+  {
+    "xCoordinate": 140,
+    "yCoordinate": 100
+  },
+  {
+    "xCoordinate": 160,
+    "yCoordinate": 120
+  }
+]
 
-8. Go to https://localhost:7184/swagger/index.html
+	- Authorization: Basic Auth
+	Credentials:
+		UserName: admin
+		Password: !Admin123
 
-9. Make authorization: Bearer + token
 
-10. RectanglesSearch.Service.API is ready for testing on Swagger.
+
 
 # Any further design considerations assuming scaling this system and integrations with external consumers.
 
